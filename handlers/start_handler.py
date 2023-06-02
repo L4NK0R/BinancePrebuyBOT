@@ -69,23 +69,27 @@ async def amount(message: Message, state: FSMContext):
     await state.update_data(amount=message.text)
     user_data = await state.get_data()
     usd = 80
-    priceForCrypto = GetPrice(user_data['chosen_crypto'])
+    priceForCrypto = GetPrice(user_data["chosen_crypto_abbr"])
     await message.answer(
-        text = f"Покупка {user_data['chosen_crypto'].upper()} в рублях - {user_data['amount']}\nИтоговая сумма в {user_data['chosen_crypto'].upper()} будет равна {(float(user_data['amount'])/float(usd)) / float(priceForCrypto)}\n\n\nКурс {user_data['chosen_crypto_abbr']} = {priceForCrypto} USD"
+        text = f"Покупка {user_data['chosen_crypto'].upper()} в рублях - {user_data['amount']}\nИтоговая сумма в {user_data['chosen_crypto'].upper()} будет равна {(float(user_data['amount'])/float(usd)) / float(priceForCrypto)}\n\n\nКурс {user_data['chosen_crypto_abbr']} = {priceForCrypto} BUSD"
     )
     await state.clear()
 
 
 def GetPrice(a):
-    url = "https://api.blockchair.com/"+a.lower()+"/stats"
-    data = requests.get(url).text
-    # Найти позицию строки "blocks"
-    index = data.find('"market_price_usd"')
-    if index != -1:
-        # Извлечь число справа от строки "blocks"
-        start_index = index + len('"market_price_usd":')
-        end_index = data.find(',', start_index)
-        number = data[start_index:end_index]
-        return number
+    url = "https://api.binance.com/api/v3/ticker/price"
+    symbol = a + "BUSD"
+    response = requests.get(url, params={'symbol': symbol})
+
+# Проверьте статус ответа
+    if response.status_code == 200:
+        # Извлеките данные из JSON-ответа
+        data = response.json()
+    
+        # Получите стоимость XMR
+        crypto_price = data['price']
+    
+        # Выведите стоимость XMR
+        return round(float(crypto_price), 3)
     else:
-        return url
+        return f"Ошибка запроса: {response.status_code}"
