@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 cryptos = [
     ["XMR","BTC","ZEC","ETH","BCH","BUSD"],
-    ["Monero","Bitcoin","ZCash","Etherium","Bitcoin Cash","Binance USD"]
+    ["Monero","Bitcoin","ZCash","Ethereum","Bitcoin-Cash","BinanceUSD"]
 ]
 
 def choose_crypto() -> ReplyKeyboardMarkup:
