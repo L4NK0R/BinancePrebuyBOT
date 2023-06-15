@@ -5,9 +5,6 @@ from aiogram.filters.text import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from keyboards.start_keyboard import choose_crypto, cryptos, yes_no
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.by import By
 import requests
 
 router = Router()
