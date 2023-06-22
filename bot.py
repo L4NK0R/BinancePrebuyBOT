@@ -9,7 +9,7 @@ async def main():
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
     logging.basicConfig(level=logging.INFO)
-    dp.include_routers(start_handler.router)
+    dp.include_router(start_handler.router_start)
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
