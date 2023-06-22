@@ -1,21 +1,49 @@
-from aiogram.types import ReplyKeyboardMarkup
-from aiogram.utils.keyboard import ReplyKeyboardBuilder
+from aiogram import types
 
-cryptos = [
-    ["XMR","BTC","ZEC","ETH","BCH","BUSD"],
-    ["Monero","Bitcoin","ZCash","Ethereum","Bitcoin-Cash","BinanceUSD"]
-]
+async def inline_keyboard_cryptos():
+    buttons = [
+        [
+            types.InlineKeyboardButton(text="XMR", callback_data="XMR"),
+            types.InlineKeyboardButton(text="ZEC", callback_data="ZEC"),
+            types.InlineKeyboardButton(text="BTC", callback_data="BTC"),
+        ],
+        [
+            types.InlineKeyboardButton(text="ETH", callback_data="ETH"),
+            types.InlineKeyboardButton(text="BCH", callback_data="BCH"),
+            types.InlineKeyboardButton(text="BUSD", callback_data="BUSD"),
+        ],[types.InlineKeyboardButton(text="Отмена", callback_data="Cancel")]
+    ]
+    kb = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    return kb
 
-def choose_crypto() -> ReplyKeyboardMarkup:
-    kb = ReplyKeyboardBuilder()
-    for crypto in cryptos[0]:
-        kb.button(text=crypto)
-    kb.adjust(3)
-    return kb.as_markup(resize_keyboard=True)
 
-def yes_no() -> ReplyKeyboardMarkup:
-    kb = ReplyKeyboardBuilder()
-    kb.button(text="Да")
-    kb.button(text="Нет")
-    kb.adjust(2)
-    return kb.as_markup(resize_keyboard=True)
+async def inline_yes_no():
+    buttons = [
+        [
+            types.InlineKeyboardButton(text="Да", callback_data="Continue")
+        ],
+        [
+            types.InlineKeyboardButton(text="Нет", callback_data="Cancel")
+        ]
+    ]
+    kb = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    return kb
+        
+async def inline_keyboard_fiat_crypto():
+    buttons = [
+        [
+            types.InlineKeyboardButton(text="RUB", callback_data="Fiat"),
+            types.InlineKeyboardButton(text="Crypto", callback_data="Crypto")
+        ]
+    ]
+    kb = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    return kb
+
+async def again():
+    buttons = [
+        [
+            types.InlineKeyboardButton(text="Начать заново", callback_data="Start")
+        ]
+    ]
+    kb = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    return kb
