@@ -12,7 +12,7 @@ async def start(callback: types.CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.message.delete_reply_markup()
     await callback.message.answer(
-        "RUB => из рублей в крипту\nCrypto => из крипты в рубли",
+        "RUB => из крипты в рубли\nCrypto => из рублей в крипту",
         reply_markup= await inline_keyboard_fiat_crypto()
     )
     await callback.answer()
@@ -21,7 +21,7 @@ async def start(callback: types.CallbackQuery, state: FSMContext):
 async def start(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(
-        f"RUB => из рублей в крипту\nCrypto => из крипты в рубли",
+        "RUB => из крипты в рубли\nCrypto => из рублей в крипту",
         reply_markup= await inline_keyboard_fiat_crypto()
     )
 
