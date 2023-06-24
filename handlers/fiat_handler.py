@@ -79,10 +79,10 @@ async def amount(message: Message, state: FSMContext):
         usd = await GetPrice("RUB")
         if user_data["chosen_crypto_abbr"] == 'BUSD':
             await message.answer(
-                text = f"{user_data['chosen_crypto_abbr'].upper()} - {user_data['amount']}\nИтоговая сумма в рублях - {float(user_data['amount'])*float(priceForCrypto)*usd} рублей\n\n\nКурс {user_data['chosen_crypto_abbr']} = {usd} рублей", reply_markup= await again()
+                text = f"{user_data['chosen_crypto_abbr'].upper()} - {user_data['amount']}\nИтоговая сумма в рублях - {round(float(user_data['amount'])*float(priceForCrypto)*usd, 2)} рублей\n\n\nКурс {user_data['chosen_crypto_abbr']} = {usd} рублей", reply_markup= await again()
             )
         else:
             await message.answer(
-                text = f"{user_data['chosen_crypto_abbr'].upper()} - {user_data['amount']}\nИтоговая сумма в рублях - {float(user_data['amount'])*float(priceForCrypto)*usd} рублей\n\n\nКурс {user_data['chosen_crypto_abbr']} = {priceForCrypto} BUSD", reply_markup= await again()
+                text = f"{user_data['chosen_crypto_abbr'].upper()} - {user_data['amount']}\nИтоговая сумма в рублях - {round(float(user_data['amount'])*float(priceForCrypto)*usd, 2)} рублей\n\n\nКурс {user_data['chosen_crypto_abbr']} = {priceForCrypto} BUSD", reply_markup= await again()
             )
         await state.clear()
