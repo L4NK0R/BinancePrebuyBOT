@@ -25,8 +25,8 @@ async def crypto_board(callback: types.CallbackQuery, state: FSMContext):
 
 @router_fiat.callback_query(Text("Cancel"), Crypto_chooser.choosing_crypto_fiat)
 async def a(callback: types.CallbackQuery, state: FSMContext):
-    await callback.message.edit_text(
-        "RUB => из рублей в крипту\nCrypto => из крипты в рубли",
+    await callback.message.answer(
+        "RUB => из крипты в рубли\nCrypto => из рублей в крипту",
         reply_markup= await inline_keyboard_fiat_crypto()
     )
     await state.clear()
