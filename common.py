@@ -7,7 +7,7 @@ cryptos = [
 
 async def GetPrice(a):
     url = "https://api.binance.com/api/v3/ticker/price"
-    if a == "RUB":
+    if a == "BUSD":
         symbol = "BUSDRUB"
     else:
         symbol = a + "BUSD"
@@ -37,4 +37,3 @@ async def floatChecker(a):
                 return a
             except ValueError:
                 return "F"
-    
